@@ -1,0 +1,23 @@
+name: Test and Deploy
+on: [push]
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        run: npm install
+  test: 
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run Tests
+        run: echo Run Tests
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: test
+    steps: 
+      - name: Deploy to Staging
+        env: 
+          KEY: STAGING
+        run: echo Deploy to $KEY
