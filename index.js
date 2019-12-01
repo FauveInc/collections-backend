@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { jwtCheck } = require('./middleware/authentication');
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(cors());
 const collections = require('./routes/api/collections');
 
 // router
-app.use('/api/collections', collections);
+app.use('/api/collections', jwtCheck, collections);
 
 const port = process.env.PORT || 5000;
 
