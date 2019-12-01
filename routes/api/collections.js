@@ -8,7 +8,7 @@ const { testCollections } = require('../../lib/queries');
 // @desc Test new route for server deploys
 // @access Public
 router.get('/test', async(req, res) => {
-    console.log('Test route hit');
+    console.log('Updated test route hit');
     const result = await testCollections();
     if (result.success) {
         res.json({
