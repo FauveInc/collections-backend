@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { testCollections } = require('../../lib/queries');
+const { testCollections, createCollection } = require('../../lib/queries');
 
 // @route GET /api/collections/test
 // @desc Test new route for server deploys
@@ -21,6 +21,21 @@ router.get('/test', async(req, res) => {
             message: 'An error occurred'
         });
     }
+});
+
+router.post('/create', async(req, res) => {
+    console.log('Create route hit');
+    const result = await createCollection(req.body);
+    if (result.success) {
+        res.json({
+            success: true,
+            message: result.data
+        })
+    }
+    res.json({
+        success: false,
+        message: result.error
+    });
 });
 
 module.exports = router;

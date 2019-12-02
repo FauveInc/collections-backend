@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
+const _ = require('lodash');
 const { jwtCheck } = require('./middleware/authentication');
 
 const app = express();
