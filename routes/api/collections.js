@@ -25,7 +25,9 @@ router.get('/test', async(req, res) => {
 
 router.post('/create', async(req, res) => {
     console.log('Create route hit');
-    const result = await createCollection(req.body);
+    const values = req.body;
+    values.owner = req.user.sub;
+    const result = await createCollection(values);
     if (result.success) {
         res.json({
             success: true,
