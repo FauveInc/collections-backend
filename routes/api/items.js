@@ -2,22 +2,30 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createItem } = require('../../lib/queries');
+const { createItem, createDetailRecord } = require('../../lib/queries');
 
 router.post('/create', async(req, res) => {
     console.log('Create item route');
     const body = req.body;
     body.owner = req.user.sub;
-    const result = await createItem(body);
-    if (result.success) {
+    const itemResult = await createItem(body);
+    if (!itemResult.success) {
+        res.json({
+            success: false,
+            message: itemResult.error
+        });
+    }
+    const itemData = itemResult.data[0];
+    const detailResult = await createDetailRecord(itemData, req.body);
+    if (detailResult.success) {
         res.json({
             success: true,
-            message: result.data
+            message: detailResult.data
         });
     }
     res.json({
         success: false,
-        message: result.error
+        message: detailResult.error
     });
 });
 
