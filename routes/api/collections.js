@@ -16,7 +16,7 @@ router.post('/create', async(req, res) => {
         res.json({
             success: true,
             message: result.data
-        })
+        });
     }
     res.json({
         success: false,
