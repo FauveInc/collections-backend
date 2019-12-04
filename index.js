@@ -20,9 +20,11 @@ app.use(cors());
 
 // load routes
 const collections = require('./routes/api/collections');
+const items = require('./routes/api/items');
 
 // router
 app.use('/api/collections', jwtCheck, collections);
+app.use('/api/items/', jwtCheck, items);
 
 const port = process.env.PORT || 5000;
 
