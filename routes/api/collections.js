@@ -2,26 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { testCollections, createCollection, getUserCollections } = require('../../lib/queries');
-
-// @route GET /api/collections/test
-// @desc Test new route for server deploys
-// @access Authenticated
-router.get('/test', async(req, res) => {
-    console.log('Updated test route hit');
-    const result = await testCollections();
-    if (result.success) {
-        res.json({
-            success: true,
-            message: result.data
-        });
-    } else {
-        res.json({
-            success: false,
-            message: 'An error occurred'
-        });
-    }
-});
+const { createCollection, getUserCollections } = require('../../lib/queries');
 
 // @route POST /api/collections/create
 // @desc Route to create new collection
