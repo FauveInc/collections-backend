@@ -5,10 +5,11 @@
   "main": "built/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc",
-    "prestart": "npm run build",
-    "dev": "nodemon .",
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "tsc": "tsc",
+    "build": "npm-run-all lint tsc",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch src -e ts --exec npm run dev:start",
     "start": "node ."
   },
   "repository": {
@@ -39,6 +40,7 @@
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.17",
     "nodemon": "^2.0.1",
+    "npm-run-all": "^4.1.5",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3"
   }
