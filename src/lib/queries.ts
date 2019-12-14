@@ -8,20 +8,11 @@ const pool = new Pool({
 export const getUserCollections = async (userID: string) => {
     const text = "SELECT * FROM collections WHERE owner = $1";
     const values = [userID];
-    try {
-        const res = await pool.query(text, values);
-        return {
-            data: res.rows,
-            success: true,
-        };
-    } catch (err) {
-        // tslint:disable-next-line:no-console
-        console.log(err);
-        return {
-            error: err,
-            success: false,
-        };
-    }
+    const res = await pool.query(text, values);             // TODO: should we catch this error or handle on top call
+    return {
+        data: res.rows,
+        success: true,
+    };
 };
 
 export const createItem = async (values) => {

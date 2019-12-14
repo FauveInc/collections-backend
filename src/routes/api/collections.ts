@@ -42,25 +42,25 @@ router.post("/create", async (req: ILooseObject, res) => {
 // @route GET /api/collections/user/:userID
 // @desc Get the collections for a user
 // @access Authenticated
-router.get("/user/:userID", async (req: ILooseObject, res) => {
-    // tslint:disable-next-line:no-console
-    console.log("Collection route hit");
-    const userID = req.params.userID;
+router.get("/user/:userID", async (req: ILooseObject, res) => {     // TODO: get an appropriate type for req
+    const userID: string = req.params.userID;
     if (userID !== req.user.sub) {
         res.json({
             message: "Invalid user",
             success: false,
         });
     }
-    const result = await getUserCollections(userID);
-    if (result.success) {
+
+    try {
+        const result = await getUserCollections(userID);
         res.json({
-            message: result.data,
+            data: result.data,
             success: true,
         });
+    } catch (err) {
+        res.json({
+            error: err,
+            success: false,
+        });
     }
-    res.json({
-        message: result.error,
-        success: false,
-    });
 });
