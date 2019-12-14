@@ -3,7 +3,7 @@ import express from "express";
 export const router = express.Router();
 
 import { createCollection, getUserCollections } from "../../lib/queries";
-import { ILooseObject } from "../../lib/types";
+import { ILooseObject, IRequest } from "../../lib/types";
 
 // @route POST /api/collections/create
 // @desc Route to create new collection
@@ -42,7 +42,7 @@ router.post("/create", async (req: ILooseObject, res) => {
 // @route GET /api/collections/user/:userID
 // @desc Get the collections for a user
 // @access Authenticated
-router.get("/user/:userID", async (req: ILooseObject, res) => {     // TODO: get an appropriate type for req
+router.get("/user/:userID", async (req: IRequest, res: express.Response) => {
     const userID: string = req.params.userID;
     if (userID !== req.user.sub) {
         res.json({
@@ -59,7 +59,7 @@ router.get("/user/:userID", async (req: ILooseObject, res) => {     // TODO: get
         });
     } catch (err) {
         res.json({
-            error: err,
+            error: err.message,
             success: false,
         });
     }
