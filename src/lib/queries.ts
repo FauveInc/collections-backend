@@ -1,9 +1,27 @@
 import * as _ from "lodash";
 import { Pool } from "pg";
+import { rollbar } from "../lib/rollbar";
 import { ILooseObject } from "../lib/types";
 const pool = new Pool({
   connectionString: `${process.env.DATABASE_URL}?ssl=true`,
 });
+
+export const getAllUsers = async () => {
+    const text = "SELECT * FROM users";
+    try {
+        const res = await pool.query(text);
+        return {
+            data: res.rows,
+            success: true,
+        };
+    } catch (err) {
+        rollbar.error(err);
+        return {
+            error: err,
+            success: false,
+        };
+    }
+};
 
 export const getUserCollections = async (userID: string) => {
     const text = "SELECT * FROM collections WHERE owner = $1";
