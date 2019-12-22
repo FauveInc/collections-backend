@@ -1,5 +1,6 @@
 import axios from "axios";
 import express from "express";
+import { hashPassword } from "../../lib/auth";
 import { getAllUsers } from "../../lib/queries";
 import { rollbar } from "../../lib/rollbar";
 
@@ -19,10 +20,24 @@ router.post("/register", async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         rollbar.error("Invalid input params (register)");
+        res.json({
+            error: "Invalid input",
+            success: false
+        });
     }
-    res.json({
-        message: "not finished"
-    });
+    try {
+        const hashedPassword = await hashPassword(password);
+        res.json({
+            data: hashedPassword,
+            success: true
+        });
+    } catch (err) {
+        rollbar.error(err);
+        res.json({
+            error: err,
+            success: false
+        });
+    }
 });
 
 // TODO: this endpoint definitely needs authentication
