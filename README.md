@@ -7,6 +7,7 @@ ROLLBAR_ACCESS_TOKEN
 JWT_SECRET
 
 ## Routes
-|endpoint|description|
-|--------|-----------|
-|/api/users/me|Returns the current user|
+|endpoint|description|status|
+|--------|-----------|---|
+|/api/users/me|Returns the current user|development
+/api/auth/register|Registers a new user|development
