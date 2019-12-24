@@ -2,6 +2,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import * as _ from "lodash";
+import routes from "./api";
+import config from "./config";
 import "./env";
 import { rollbar } from "./lib/rollbar";
 import { jwtCheck } from "./middleware/authentication";
@@ -23,6 +25,8 @@ app.use(bodyParser.json({
 
 // cors middleware
 app.use(cors());
+
+app.use(config.api.prefix, routes());
 
 // load routes
 import { router as collections} from "./routes/api/collections";

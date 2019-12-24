@@ -23,6 +23,16 @@ export const getAllUsers = async () => {
     }
 };
 
+export const createUser = async ({ userId, email, password }) => {
+    const text = "INSERT INTO users (user_id, email, password) VALUES ($1, $2, $ 3) RETURNING *";
+    const values = [userId, email, password];
+    const res = await pool.query(text, values);
+    return {
+        data: res.rows,
+        success: true,
+    };
+};
+
 export const getUserCollections = async (userID: string) => {
     const text = "SELECT * FROM collections WHERE owner = $1";
     const values = [userID];
