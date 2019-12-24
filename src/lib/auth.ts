@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import uuidv4 from "uuid/v4";
 import { rollbar } from "../lib/rollbar";
 
 const SALTROUNDS = 10;
@@ -18,4 +19,8 @@ export const hashPassword = async (password) => {
             success: false
         };
     }
+};
+
+export const generateUUID = () => {
+    return uuidv4();
 };
