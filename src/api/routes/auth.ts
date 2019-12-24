@@ -2,6 +2,7 @@ import { celebrate, Joi } from "celebrate";
 import { NextFunction, Request, Response, Router } from "express";
 import { Container } from "typedi";
 import { IUserInputDTO } from "../../interfaces/Iuser";
+import AuthService from "../../services/auth";
 const route = Router();
 
 export default (app: Router) => {
