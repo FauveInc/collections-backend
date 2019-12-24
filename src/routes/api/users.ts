@@ -1,7 +1,7 @@
 import axios from "axios";
 import express from "express";
-import { hashPassword } from "../../lib/auth";
-import { getAllUsers } from "../../lib/queries";
+import { generateUUID, hashPassword } from "../../lib/auth";
+import { createUser, getAllUsers } from "../../lib/queries";
 import { rollbar } from "../../lib/rollbar";
 
 export const router = express.Router();
@@ -27,8 +27,15 @@ router.post("/register", async (req, res) => {
     }
     try {
         const hashedPassword = await hashPassword(password);
+        const userId = generateUUID();
+        const data = {
+            email,
+            password: hashedPassword,
+            userId
+        };
+        const userResult = await createUser(data);
         res.json({
-            data: hashedPassword,
+            data: userResult.data,
             success: true
         });
     } catch (err) {
