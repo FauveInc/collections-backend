@@ -16,7 +16,7 @@ export default class AuthService {
             // dispatch welcome email
             // dispatch register event
             // get user object
-            return { user: { _id: "test"}, token };
+            return { user: { _id: "12345"}, token };
         } catch (err) {
             // TODO: log error to rollbar
             throw err;
