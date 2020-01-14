@@ -16,4 +16,9 @@ export default {
     api: {
         prefix: "/api",
     },
+
+    /**
+     * JWT config
+     */
+    jwtSecret: process.env.JWT_SECRET,
 };
