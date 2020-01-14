@@ -2,15 +2,14 @@
   "name": "collections-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "built/index.js",
+  "main": "src/app.ts",
   "scripts": {
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "tsc": "tsc",
-    "build": "npm-run-all lint tsc",
-    "dev:start": "npm-run-all build start",
-    "dev": "nodemon --watch src -e ts --exec npm run dev:start",
-    "start": "node .",
-    "test": "jest"
+    "build": "tsc",
+    "heroku-postbuild": "npm run build",
+    "start": "nodemon",
+    "test": "jest",
+    "inpsect": "nodemon --inspect src/app.ts"
   },
   "repository": {
     "type": "git",
@@ -49,8 +48,9 @@
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.17",
     "jest": "^24.9.0",
-    "nodemon": "^2.0.1",
+    "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
+    "ts-node": "^8.6.2",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3"
   }
