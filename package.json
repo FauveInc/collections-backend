@@ -6,10 +6,10 @@
   "scripts": {
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "heroku-postbuild": "npm run build",
-    "start": "nodemon",
+    "start": "node ./built/app.js",
     "test": "jest",
-    "inpsect": "nodemon --inspect src/app.ts"
+    "inpsect": "nodemon --inspect src/app.ts",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
