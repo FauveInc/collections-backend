@@ -5,8 +5,7 @@ import * as _ from "lodash";
 import routes from "./api";
 import config from "./config";
 import "./env";
-import { rollbar } from "./lib/rollbar";
-import { jwtCheck } from "./middleware/authentication";
+import { rollbar } from "./lib-OLD/rollbar";
 
 const app = express();
 
@@ -27,16 +26,6 @@ app.use(bodyParser.json({
 app.use(cors());
 
 app.use(config.api.prefix, routes());
-
-// load routes
-import { router as collections} from "./routes/api/collections";
-import { router as items } from "./routes/api/items";
-import { router as users } from "./routes/api/users";
-
-// router
-app.use("/api/collections", jwtCheck, collections);
-app.use("/api/items", jwtCheck, items);
-app.use("/api/users", users);
 
 const port = process.env.PORT || 5000;
 
