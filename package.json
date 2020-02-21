@@ -8,7 +8,6 @@
     "build": "tsc",
     "start": "node ./built/app.js",
     "test": "jest",
-    "inspect": "nodemon --inspect src/app.ts",
     "dev": "nodemon"
   },
   "repository": {
